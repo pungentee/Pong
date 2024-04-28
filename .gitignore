@@ -1,0 +1,6 @@
+.idea/
+.vscode/
+.cache/
+**build**/
+xcode-proj/
+.DS_Store
