@@ -1,11 +1,15 @@
 CC = clang
-DEBUG_FLAGS = -Wall -Werror -g -O0
-REALESE_FLAGS = -Wall -Werror -0fast
 
-SOURCE:=$(wildcard *.c)
+CFLAGS = -Wall -Werror -std=c11
+DEBUG_CFLAGS = $(CFLAGS) -g -O0
+REALESE_CFLAGS = $(CFLAGS) -Ofast
+
+SOURCES_DIR = src
+SOURCES = $(wildcard $(SOURCES_DIR)/*.c)
 
 BUILD_DIR = build
-EXEC = Pong
+DEBUG_TARGET := $(BUILD_DIR)/debug
+RELEASE_TARGET := $(BUILD_DIR)/release
 
 LIBS = -lm -lraylib
 
@@ -13,18 +17,19 @@ ifeq ($(shell uname -s),Darwin)
 	LIBS += -framework IOKit -framework Cocoa -framework OpenGL
 endif
 
-all:
-	@mkdir -p $(BUILD_DIR)
-	@$(CC) $(REALESE_FLAGS) $(LIBS) -o $(BUILD_DIR)/$(EXEC) $(SOURCE)
-	@echo "Successfully compiled!"
+all: dirs
+	@$(CC) $(REALESE_CFLAGS) $(LIBS) $(SOURCES) -o $(RELEASE_TARGET)
+	@echo "Compiled successfully!"
+
+debug: dirs
+	@$(CC) $(DEBUG_CFLAGS) $(LIBS) $(SOURCES) -o $(DEBUG_TARGET)
+	@echo "Compiled successfully!"
 
 run: all
-	@./$(BUILD_DIR)/$(EXEC)
+	@./$(RELEASE_TARGET)
 
-debug:
-	@mkdir -p $(BUILD_DIR)
-	@$(CC) $(DEBUG_FLAGS) $(LIBS) -o $(BUILD_DIR)/$(EXEC) $(SOURCE)
-	@echo "Successfully compiled!"
+dirs:
+	@mkdir -p build
 
 clear:
 	@rm -rf $(BUILD_DIR)
