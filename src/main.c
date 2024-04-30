@@ -25,7 +25,7 @@
 
 #define BALL_RADIUS 13
 
-typedef struct {
+typedef struct Ball {
     Vector2 center;
     double angle;
     int direction;
@@ -51,7 +51,7 @@ int main(void) {
 
     int gameState = BEGIN;
 
-    int winner, leftScore, rightScore;
+    int winner = 0, leftScore = 0, rightScore = 0;
 
     Ball ball;
 
