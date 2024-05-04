@@ -5,11 +5,13 @@ Simple Pong Game written in God's language
 ## Dependencies
 
 - [raylib](https://www.raylib.com)
-- [make](https://www.gnu.org/software/make/)
-- [clang](https://clang.llvm.org)
+- [cmake](https://cmake.org)
 
 ## Build and Lunch
 
 ```shell
-make run
+mkdir build
+cmake -B build
+cmake --build build
+./build/Pong
 ```
