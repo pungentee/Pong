@@ -1,3 +1,5 @@
+// Copyright © 2024 Tymofii Kliuiev <pungentee@gmail.com>
+
 #include <math.h>
 #include <raylib.h>
 #include <stdio.h>
